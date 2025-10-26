@@ -11,17 +11,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    # Azione di checkout più esplicita
     - name: Checkout code
       uses: actions/checkout@v4
+      with:
+        path: '.' # Forza il checkout nella directory corrente
+
+    - name: List files after checkout
+      run: ls -R
 
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: '8.0.x'
-
-    # PASSO DI DEBUG: Elenca tutti i file e le cartelle
-    - name: List files in the repository
-      run: ls -R
 
     - name: Restore dependencies
       run: dotnet restore AthenaGateway.sln
