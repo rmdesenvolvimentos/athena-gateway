@@ -6,11 +6,6 @@ on:
   pull_request:
     branches: [ "main" ]
 
-# Aggiunta fondamentale: imposta la cartella di lavoro per tutti i comandi
-defaults:
-  run:
-    working-directory: ./
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -23,6 +18,10 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: '8.0.x'
+
+    # PASSO DI DEBUG: Elenca tutti i file e le cartelle
+    - name: List files in the repository
+      run: ls -R
 
     - name: Restore dependencies
       run: dotnet restore AthenaGateway.sln
